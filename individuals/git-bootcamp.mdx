@@ -49,6 +49,16 @@ git config --global user.email your.email@example.com
 
 GitHub 等平台是通过邮件地址关联账号的，阅读[对应的官方文档](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address)确保两个地方配置的是相同的邮件地址。
 
+### git pull 策略
+
+默认情况下，`git pull` 会将远程分支的 commit 以 `merge` 的方式追加到本地分支之上，这经常会导致作混乱的 commit history。更多的情况下，作为下游的本地分支 `rebase` 到作为上游的远程分支是更好的做法。
+
+为此，`git pull` 命令提供两种策略：`--merge` 和 `--rebase`，其中前者为默认策略。要想默认使用 `--rebase`，可通过以下命令设置：
+
+```shell
+git config --global pull.rebase true
+```
+
 ### gitignore 规则
 
 软件开发环境经常会产生大量的中间产物和本地文件，这些内容不应该被提交到代码仓库当中。一般来说，项目本身导致的需要忽略的文件，会添加到项目目录下的 `.gitignore` 文件当中。但是也有相当部分的文件跟特定的开发平台和开发环境相关，上游项目未必会接受为特殊开发者服务的忽略规则。
